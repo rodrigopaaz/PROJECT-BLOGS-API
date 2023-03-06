@@ -13,4 +13,9 @@ router.get(
   userController.findAll,
 );
 
+router.get(
+  '/:id',
+  userController.findById,
+);
+
 module.exports = router;

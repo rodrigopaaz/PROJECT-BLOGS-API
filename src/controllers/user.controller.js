@@ -33,7 +33,29 @@ const findAll = async (req, res) => {
     }
 };
 
+const findById = async (req, res) => {
+    try {       
+        const { id } = req.params;    
+        const { authorization } = req.headers;
+        if (!authorization) {
+ return res.status(401).json(
+            { message: 'Token not found' },
+        ); 
+}
+const user = await userService.findById(id);
+        if (!user) return res.status(404).json({ message: 'User does not exist' });
+        const checkToken = verifyToken(authorization);
+        if (checkToken) {
+        return res.status(200).json(user); 
+        }
+    } catch (error) {
+        return res.status(401)
+    .json({ message: 'Expired or invalid token' }); 
+    }
+};
+
 module.exports = {
     createUser,
     findAll,
+    findById,
 };

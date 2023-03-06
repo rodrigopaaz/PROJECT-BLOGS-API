@@ -13,6 +13,11 @@ const findAll = async () => {
     return data;
 };
 
+const findById = async (id) => {
+    const data = await User.findByPk(id, noPassword);
+    return data;
+};
+
 const create = async (data) => {
     const { displayName, email, password } = data;
     const checkUser = await schemas.validateUser(email);
@@ -27,4 +32,5 @@ module.exports = {
     create,
     getByUserName,
     findAll,
+    findById,
 };
