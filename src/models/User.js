@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
             primaryKey: true,
             type: DataTypes.INTEGER,
           },
-          display_name: {
+          displayName: {
             allowNull: false,
             type: DataTypes.STRING,
           },
@@ -21,11 +21,13 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
           },
           image: {
-            allowNull: false,
+            allowNull: true,
+            defaultValue: 'url',
             type: DataTypes.STRING,
           },
     },
     {timestamps: false,
+      underscored: true,
      tableName: 'users'    
     }
     );

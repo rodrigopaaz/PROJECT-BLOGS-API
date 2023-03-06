@@ -3,11 +3,12 @@ const express = require('express');
 const app = express();
 app.use(express.json());
 const blogsRoutes = express.Router();
-const { loginRouter } = require('./routes');
+const { loginRouter, userRouter } = require('./routes');
 
 // ...
 
 blogsRoutes.use('/login', loginRouter);
+blogsRoutes.use('/user', userRouter);
 
 // não remova ou mova esse endpoint
 app.get('/', (_request, response) => {
