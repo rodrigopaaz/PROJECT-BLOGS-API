@@ -1,6 +1,6 @@
 const { userService } = require('../services');
 const errorMap = require('../utils/errorMap');
-const { createToken, verifyToken } = require('../utils/jwtToken');
+const { createToken, verifyToken } = require('../auth/jwtToken');
 
 const createUser = async (req, res) => {
     const data = req.body;
