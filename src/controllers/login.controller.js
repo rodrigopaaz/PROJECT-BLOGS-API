@@ -1,5 +1,5 @@
 require('dotenv/config');
-const token = require('../utils/jwtToken');
+const { createToken: token } = require('../utils/jwtToken');
 
 const { userService } = require('../services');
 

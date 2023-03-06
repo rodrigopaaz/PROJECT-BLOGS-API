@@ -1,13 +1,15 @@
  const { User } = require('../models');
  const { schemas } = require('./validations');
 
+ const noPassword = { attributes: { exclude: ['password'] } };
+
 const getByUserName = async (email) => {
     const data = await User.findOne({ where: { email } });
     return data;
 };
 
 const findAll = async () => {
-    const data = await User.findAll();
+    const data = await User.findAll(noPassword);
     return data;
 };
 
