@@ -14,11 +14,16 @@ const findAll = async () => {
    );
    return data;
 };
-/*
+
 const findById = async (id) => {
-   const data = await BlogPost.findByPk(id, noPassword);
+   const data = await BlogPost.findByPk(id, 
+    
+    { include: [{ model: User, as: 'user', attributes: { exclude: ['password'] } },
+   { model: Category, as: 'categories' }], 
+});
+    if (!data) return { type: 'NOT_FOUND', message: 'Post does not exist' };
    return data;
-}; */
+};
 
 const create = async (data, userId) => {
     const { title, content, categoryIds } = data;
@@ -44,4 +49,5 @@ const create = async (data, userId) => {
 module.exports = {
    create,
    findAll,
+   findById,
 };

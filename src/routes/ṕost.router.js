@@ -15,14 +15,9 @@ router.post(
   postController.findAll,
 );
 
-/* router.get(
-  '/',
-  userController.findAll,
-);
-
 router.get(
-  '/:id',
-  userController.findById,
-); */
+  '/:id', validateToken,
+  postController.findById,
+);
 
 module.exports = router;
