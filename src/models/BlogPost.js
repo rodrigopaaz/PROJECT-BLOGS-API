@@ -3,30 +3,25 @@ module.exports = (sequelize, DataTypes) => {
     const BlogPost = sequelize.define('BlogPost',
     {
         id: {
-            allowNull: false,
             autoIncrement: true,
+            allowNull: false,
             primaryKey: true,
             type: DataTypes.INTEGER,
           },
           title: {
-            allowNull: false,
             type: DataTypes.STRING,
           },
           content: {
-            allowNull: false,
-            type: DataTypes.STRING,
-          },
-          password: {
-            allowNull: false,
             type: DataTypes.STRING,
           },
           published: {
-            allowNull: true,
+            allowNull: false,
             type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW
           },
           updated: {
-            allowNull: true,
             type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW
           },
           userId: {
             foreignKey: true,
@@ -36,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     {timestamps: false,
       underscored: true,
-     tableName: 'blog_post'    
+     tableName: 'blog_posts'    
     }
     );
     BlogPost.associate = (models) => {
