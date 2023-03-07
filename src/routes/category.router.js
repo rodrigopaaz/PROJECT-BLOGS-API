@@ -9,6 +9,11 @@ router.post(
   categoryController.createCategory,
 );
 
+router.get(
+  '/', validateToken,
+  categoryController.findAll,
+);
+
 /* router.get(
   '/',
   userController.findAll,
