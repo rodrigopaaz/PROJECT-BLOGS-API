@@ -1,18 +1,20 @@
-const { BlogPost, PostCategory, sequelize } = require('../models');
+const { BlogPost, PostCategory, sequelize, User, Category } = require('../models');
 /* const { schemas } = require('./validations'); */
 
-/* const noPassword = { attributes: { exclude: ['password'] } };
-
-const getByUserName = async (email) => {
+/* const getByUserName = async (email) => {
    const data = await BlogPost.findOne({ where: { email } });
    return data;
-};
+}; */
 
 const findAll = async () => {
-   const data = await BlogPost.findAll(noPassword);
+   const data = await BlogPost.findAll(
+    { include: [{ model: User, as: 'user', attributes: { exclude: ['password'] } },
+   { model: Category, as: 'categories' }], 
+},
+   );
    return data;
 };
-
+/*
 const findById = async (id) => {
    const data = await BlogPost.findByPk(id, noPassword);
    return data;
@@ -41,7 +43,5 @@ const create = async (data, userId) => {
 
 module.exports = {
    create,
-/*    getByUserName,
    findAll,
-   findById, */
 };

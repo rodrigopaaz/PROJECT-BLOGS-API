@@ -10,10 +10,10 @@ router.post(
   postController.create,
 );
 
-/* router.get(
+  router.get(
   '/', validateToken,
   postController.findAll,
-); */
+);
 
 /* router.get(
   '/',

@@ -15,6 +15,13 @@ const create = async (req, res) => {
     });
 };
 
+const findAll = async (req, res) => {
+    const dataService = await postService
+    .findAll();
+    return res.status(200).json(dataService);
+};
+
 module.exports = {
     create,
+    findAll,
 };
