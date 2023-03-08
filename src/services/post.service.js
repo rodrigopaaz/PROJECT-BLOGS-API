@@ -1,3 +1,4 @@
+const { Op } = require('sequelize');
 const { BlogPost, PostCategory, sequelize, User, Category } = require('../models');
 /* const { schemas } = require('./validations'); */
 
@@ -23,6 +24,27 @@ const findById = async (id) => {
 });
     if (!data) return { type: 'NOT_FOUND', message: 'Post does not exist' };
    return data;
+};
+
+const findByQuery = async (query) => {
+    const data = await BlogPost.findAll(
+        ({
+            where: {
+                [Op.or]: {
+                content: {
+                    [Op.like]: `%${query}%`,
+                  },
+              title: {
+                [Op.like]: `%${query}%`,
+              },
+            },
+            },
+        include: [{ model: User, as: 'user', attributes: { exclude: ['password'] } },
+        { model: Category, as: 'categories' }],
+        }),
+);
+            
+    return data;
 };
 
 const create = async (data, userId) => {
@@ -82,4 +104,5 @@ module.exports = {
    findById,
    update,
    remove,
+   findByQuery,
 };

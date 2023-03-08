@@ -10,6 +10,11 @@ router.post(
   postController.create,
 );
 
+router.get(
+  '/search', validateToken,
+  postController.findByQuery,
+);
+
   router.get(
   '/', validateToken,
   postController.findAll,

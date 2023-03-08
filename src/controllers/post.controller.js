@@ -29,6 +29,12 @@ const findById = async (req, res) => {
     return res.status(200).json(dataService);
 };
 
+const findByQuery = async (req, res) => {
+    const { q } = req.query;
+    const getData = await postService.findByQuery(q);
+    return res.status(200).json(getData);
+};
+
 const update = async (req, res) => {
     const { id } = req.params;
     const { userId } = req.data;
@@ -60,4 +66,5 @@ module.exports = {
     findById,
     update,
     remove,
+    findByQuery,
 };
