@@ -34,7 +34,10 @@ const update = async (req, res) => {
     const { userId } = req.data;
     const { title, content } = req.body;
     const dataService = await postService.update(id, title, content);
-    if (dataService.type) return res.status(400).json({ message: 'Some required fields are missing' });
+    if (dataService.type) {
+ return res.status(400)
+    .json({ message: 'Some required fields are missing' }); 
+}
     
     if (userId !== dataService.userId) {
  return res.status(401)
