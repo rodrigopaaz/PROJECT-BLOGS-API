@@ -54,8 +54,19 @@ const user = await userService.findById(id);
     }
 };
 
+const remove = async (req, res) => {
+    try {
+        const { userId } = req.data;
+        await userService.remove(userId);
+        return res.status(204).end();
+    } catch (error) {
+        return res.status(404).json({ message: 'User not found', error });
+    }
+};
+
 module.exports = {
     createUser,
     findAll,
     findById,
+    remove,
 };

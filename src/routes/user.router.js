@@ -1,5 +1,6 @@
 const express = require('express');
 const { userController } = require('../controllers');
+const validateToken = require('../middlewares/validateToken');
 
 const router = express.Router();
 
@@ -16,6 +17,11 @@ router.get(
 router.get(
   '/:id',
   userController.findById,
+);
+
+router.delete(
+  '/me', validateToken,
+  userController.remove,
 );
 
 module.exports = router;
