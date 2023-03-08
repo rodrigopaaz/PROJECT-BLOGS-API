@@ -46,9 +46,18 @@ const update = async (req, res) => {
 return res.status(200).json(dataService);   
 };
 
+const remove = async (req, res) => {
+    const { id } = req.params;
+    const { userId } = req.data;  
+    const removePost = await postService.remove(id, userId);
+    if (removePost.type) return res.status(removePost.type).json({ message: removePost.message });
+    return res.status(204).json({ message: 'removed' });
+};
+
 module.exports = {
     create,
     findAll,
     findById,
     update,
+    remove,
 };

@@ -59,9 +59,27 @@ const update = async (id, title, content) => {
     }
 };
 
+const remove = async (id, userId) => {
+    try {
+        const getUserData = await findById(id);
+        if (getUserData.type) throw new Error();
+        if (getUserData.userId !== userId) {  
+            return { type: 401, message: 'Unauthorized user' };
+          }
+        await BlogPost.destroy({
+            where: { id },
+        });
+
+    return { type: '', message: 'removed' };
+    } catch (error) {
+        return { type: 404, message: 'Post does not exist' };
+    }
+};
+
 module.exports = {
    create,
    findAll,
    findById,
    update,
+   remove,
 };
