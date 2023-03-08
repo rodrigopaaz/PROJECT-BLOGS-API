@@ -46,8 +46,22 @@ const create = async (data, userId) => {
     }
 };
 
+const update = async (id, title, content) => {
+    try {
+            if (!title || !content) throw new Error();
+            await BlogPost.update({ title, content }, {
+            where: { id },
+        });
+        const updatedData = await findById(id);
+        return updatedData;
+    } catch (error) {
+        return { type: 401, message: 'Not found', error };
+    }
+};
+
 module.exports = {
    create,
    findAll,
    findById,
+   update,
 };

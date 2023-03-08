@@ -20,4 +20,9 @@ router.get(
   postController.findById,
 );
 
+router.put(
+  '/:id', validateToken,
+  postController.update,
+);
+
 module.exports = router;

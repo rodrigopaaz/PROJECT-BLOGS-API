@@ -29,8 +29,23 @@ const findById = async (req, res) => {
     return res.status(200).json(dataService);
 };
 
+const update = async (req, res) => {
+    const { id } = req.params;
+    const { userId } = req.data;
+    const { title, content } = req.body;
+    const dataService = await postService.update(id, title, content);
+    if (dataService.type) return res.status(400).json({ message: 'Some required fields are missing' });
+    
+    if (userId !== dataService.userId) {
+ return res.status(401)
+    .json({ message: 'Unauthorized user' }); 
+}
+return res.status(200).json(dataService);   
+};
+
 module.exports = {
     create,
     findAll,
     findById,
+    update,
 };
